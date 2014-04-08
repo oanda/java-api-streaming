@@ -21,8 +21,11 @@ public class JavaApiStreaming {
 
         try {
 
-            HttpUriRequest httpGet = new HttpGet("https://stream-fxpractice.oanda.com/v1/quote?accountId=<your-account-id>&instruments=EUR_USD,USD_CAD,USD_JPY");
-            httpGet.setHeader(new BasicHeader("Authorization", "Bearer <your-access-token>"));
+            HttpUriRequest httpGet = new HttpGet("http://stream-sandbox.oanda.com/v1/quote?instruments=EUR_USD");
+
+            //for fxpractice:
+            //HttpUriRequest httpGet = new HttpGet("https://stream-sandbox.oanda.com/v1/quote?accountId=<your-account-id>&instruments=EUR_USD");
+            //httpGet.setHeader(new BasicHeader("Authorization", "Bearer <your-access-token>"));
 
             System.out.println("Executing request: " + httpGet.getRequestLine());
 
