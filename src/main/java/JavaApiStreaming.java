@@ -21,8 +21,15 @@ public class JavaApiStreaming {
 
         try {
 
-            HttpUriRequest httpGet = new HttpGet("https://stream-fxpractice.oanda.com/v1/prices?accountId=<your-account-id>&instruments=EUR_USD,USD_CAD,USD_JPY");
-            httpGet.setHeader(new BasicHeader("Authorization", "Bearer <your-access-token>"));
+            // Set these variables to whatever personal ones are preferred
+            String domain = "http://stream-fxpractice.oanda.com";
+            String access_token = "ACCESS-TOKEN";
+            String account_id = "1234567";
+            String instruments = "EUR_USD,USD_JPY,EUR_JPY";
+
+
+            HttpUriRequest httpGet = new HttpGet(domain + "/v1/prices?accountId=" + account_id + "&instruments=" + instruments);
+            httpGet.setHeader(new BasicHeader("Authorization", "Bearer " + access_token));
 
             System.out.println("Executing request: " + httpGet.getRequestLine());
 
@@ -39,7 +46,12 @@ public class JavaApiStreaming {
                     Object obj = JSONValue.parse(line);
                     JSONObject tick = (JSONObject) obj;
 
-                    //ignore heartbeats
+                    // unwrap if necessary
+                    if (tick.containsKey("tick")) {
+                        tick = (JSONObject) tick.get("tick");
+                    }
+
+                    // ignore heartbeats
                     if (tick.containsKey("instrument")) {
                         System.out.println("-------");
 
