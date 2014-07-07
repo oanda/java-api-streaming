@@ -22,7 +22,7 @@ public class JavaApiStreaming {
         try {
 
             // Set these variables to whatever personal ones are preferred
-            String domain = "http://stream-fxpractice.oanda.com";
+            String domain = "https://stream-fxpractice.oanda.com";
             String access_token = "ACCESS-TOKEN";
             String account_id = "1234567";
             String instruments = "EUR_USD,USD_JPY,EUR_JPY";
