@@ -7,7 +7,8 @@ import java.util.Date;
 import org.apache.http.*;
 import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.client.HttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 
@@ -17,7 +18,7 @@ import org.json.simple.JSONValue;
 public class JavaApiStreaming {
     public static void main (String[]args) throws IOException {
 
-        DefaultHttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpClient = HttpClientBuilder.create().build();
 
         try {
 
