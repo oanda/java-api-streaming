@@ -1,4 +1,4 @@
-java-api-streaming
+FX-OANDA-Streaming
 ==================
 
 A simple demo app in Java 8 using Spring Boot for getting streaming rates using OANDA
