@@ -1,5 +1,9 @@
 package io.cax.fx.oanda.streaming;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cax.fx.oanda.streaming.domain.Tick;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,6 +51,7 @@ public class FXOANDAStreaming implements CommandLineRunner{
 
         restTemplate = new RestTemplate();
 
+
         UriComponents uriComponents = UriComponentsBuilder.fromUriString(domain).path("/v1/prices").queryParam("accountId",accountId).queryParam("instruments",instruments).build();
 
         restTemplate.execute(uriComponents.toUriString(),
@@ -54,10 +59,27 @@ public class FXOANDAStreaming implements CommandLineRunner{
                 clientHttpRequest -> clientHttpRequest.getHeaders().add("Authorization","Bearer " + accessToken),
                 clientHttpResponse -> {
                     try(Scanner scanner = new Scanner(clientHttpResponse.getBody(),"utf-8")){
-                        while(scanner.hasNext()) logger.info(scanner.nextLine());
+
+                        while(scanner.hasNext()) formatPrintContent(scanner.nextLine());
                     }
                     return new ResponseEntity<>(HttpStatus.OK);
-                },
-                String.class);
+                });
+    }
+
+    private void formatPrintContent(String content){
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+
+            mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+            Tick tick = mapper.readValue(content,Tick.class);
+            logger.info(mapper.writer(new DefaultPrettyPrinter()).writeValueAsString(tick));
+
+        } catch (IOException e) {
+            logger.debug("heartbeat not processed: " + e.getMessage());
+        }
+
+
     }
 }
