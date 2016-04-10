@@ -10,7 +10,7 @@ connections.
 Clone this repo to the location of your choice.
 
 Modify the following variables in
-[application.properites](src/main/resources/appllication.properties):
+[application.properites](src/main/resources/application.properties):
 
     domain
     access_token
