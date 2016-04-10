@@ -1,16 +1,16 @@
 java-api-streaming
 ==================
 
-A simple demo app in Java for getting streaming rates using OANDA
-API. This example uses [apache httpcomponents](http://hc.apache.org/httpcomponents-client-ga/) for https
-connections and [json-simple](https://code.google.com/p/json-simple/) for json decoding.
+A simple demo app in Java 8 using Spring Boot for getting streaming rates using OANDA
+API. This example uses [Spring (RestTemplate](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html) for https
+connections.
 
 ### Setup
 
 Clone this repo to the location of your choice.
 
 Modify the following variables in
-[JavaApiStreaming.java](src/main/java/JavaApiStreaming.java):
+[application.properites](src/main/resources/appllication.properties):
 
     domain
     access_token
@@ -22,8 +22,8 @@ On Ubuntu, you can run `sudo apt-get install maven`.
     
 To create and execute the jar file, run
 
-    mvn package
-    java -jar target/streaming-example-java-1.jar
+    mvn clean package
+    java -jar target/oanda.streaming-0.0.1-SNAPSHOT.jar
 
 ### Sample Output
 

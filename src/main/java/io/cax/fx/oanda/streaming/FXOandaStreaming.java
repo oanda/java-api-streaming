@@ -33,6 +33,9 @@ public class FXOANDAStreaming implements CommandLineRunner{
     @Value("${oanda.domain}")
     private String domain;
 
+    @Value("${oanda.instruments}")
+    private String instruments;
+
     private RestOperations restTemplate;
 
     public static void main (String[]args) throws IOException {
@@ -43,8 +46,6 @@ public class FXOANDAStreaming implements CommandLineRunner{
     public void run(String... strings) throws Exception {
 
         restTemplate = new RestTemplate();
-
-        String instruments = "EUR_USD,USD_JPY,EUR_JPY";
 
         UriComponents uriComponents = UriComponentsBuilder.fromUriString(domain).path("/v1/prices").queryParam("accountId",accountId).queryParam("instruments",instruments).build();
 
