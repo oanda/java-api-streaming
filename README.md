@@ -15,7 +15,10 @@ Modify the following variables in
     domain
     access_token
     account_id
-    instruments
+    instruments 
+
+Make sure you separate the instruments by comma (e.g: EUR_USD,USD_JPY,EUR_JPY). 
+
 
 Maven is used for building. Install from http://maven.apache.org/download.cgi.
 On Ubuntu, you can run `sudo apt-get install maven`. On Mac using brew `brew install maven`
