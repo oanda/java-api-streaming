@@ -2,7 +2,7 @@ FX-OANDA-Streaming
 ==================
 
 A simple demo app in Java 8 using Spring Boot for getting streaming rates using OANDA
-API. This example uses [Spring (RestTemplate](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html) for https
+API. This example uses [Spring RestTemplate](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html) for https
 connections.
 
 ### Setup
