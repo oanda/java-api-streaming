@@ -1,5 +1,7 @@
 package io.cax.fx.oanda.streaming;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +20,8 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class FXOANDAStreaming implements CommandLineRunner{
+
+    Logger logger = LoggerFactory.getLogger(FXOANDAStreaming.class);
 
     @Value("${oanda.access_token}")
     private String accessToken;
@@ -48,16 +52,11 @@ public class FXOANDAStreaming implements CommandLineRunner{
                 HttpMethod.GET,
                 clientHttpRequest -> clientHttpRequest.getHeaders().add("Authorization","Bearer " + accessToken),
                 clientHttpResponse -> {
-
                     try(Scanner scanner = new Scanner(clientHttpResponse.getBody(),"utf-8")){
-                        scanner.useDelimiter("\\n");
-                        while(scanner.hasNext()) System.out.println(scanner.next());
+                        while(scanner.hasNext()) logger.info(scanner.nextLine());
                     }
-
                     return new ResponseEntity<>(HttpStatus.OK);
                 },
-                Object.class);
-
+                String.class);
     }
-
 }

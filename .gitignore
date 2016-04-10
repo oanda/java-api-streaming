@@ -19,7 +19,7 @@ hs_err_pid*
 # User-specific stuff:
 .idea/
 
-application.properties
+/src/main/resources/application-local.properties
 
 # IntelliJ
 /out/
